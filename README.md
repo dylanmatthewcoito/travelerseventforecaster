@@ -1,19 +1,46 @@
 # UCD-Proj-1
+
 UCD Project 1: Team 6
-
-
-#Project Proposal:
-
 
 Project Title: Trip Forecaster
 
-Project Description: This app will give you a detailed weather forecast of the user's chosen loction.  
+## Description
 
-User Story: As a traveler: I want to: search differrent outdoor destinations for weather forecast information.
-                           So that: I can plan a trip accordingly.
+User Story 
+- AS A traveler
+- I WANT to see the weather forecast
+- I WANT to see potential camping grounds
+- SO THAT I can plan a trip accordingly
+
+Acceptance criteria 
+- GIVEN a dashboard with form inputs
+- WHEN I search for a city 
+- THEN I am presented with a 5 day weather forecast
+- THEN I am presented with a list of potential camping grounds
+- WHEN I find what I am looking for
+- THEN I can click on add to favorites button
+- WHEN I want to remove something from the favorite's list
+- THEN I can click on remove from favorites button
 
 Wireframe: To be done at a later date. See issues tab.
 
-API: Google Maps API and OpenWeather API
-
 Tasks breakdown: See issues tab.
+
+## Installations
+
+N/A
+
+## Usage
+
+Plan a camping trip given campground options as well as 5 day weather forecast.
+
+## Credits
+
+ - Google Maps Places API
+ - Openweathermap API
+
+## License
+
+None.
+
+
