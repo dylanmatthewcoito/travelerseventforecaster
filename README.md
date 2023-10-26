@@ -12,7 +12,7 @@ Project Description: This app will give you a detailed weather forecast of the u
 User Story: As a traveler: I want to: search differrent outdoor destinations for weather forecast information.
                            So that: I can plan a trip accordingly.
 
-Wireframe: To be done at a later date.
+Wireframe: To be done at a later date. See issues tab.
 
 API: Google Maps API and OpenWeather API
 
