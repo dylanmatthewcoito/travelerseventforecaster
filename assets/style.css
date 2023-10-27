@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+}
+.column {
+    column-count: 5;
+    column-gap: 30px;
+    flex-wrap: wrap;
+    display: inline-flex;
+}
+
+.margin {
+    margin: 2%;
+}
+
+.justify-content {
+    justify-content: center;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.flex {
+    display: flex;
+}
+#city-form {
+    min-width: 15%;
+    padding: 10px;
+}
+
+.border {
+    border: solid 1px;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+}
