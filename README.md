@@ -4,6 +4,24 @@ UCD Project 1: Team 6
 
 Project Title: Trip Forecaster
 
+## MVP 
+
+weather API + google maps places API 
+
+- 5 day forecast of said location
+- list of one of activity (ie camping or museums)
+- saving options for the activity
+- a remove option for the activity
+- a polished UI 
+- quality readme file
+- clean code
+
+additional time: 
+
+- more than one category for the activities 
+- add modals that provide more info about said activity 
+
+
 ## Description
 
 User Story 
