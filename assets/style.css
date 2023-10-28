@@ -2,9 +2,22 @@
     box-sizing: border-box;
 }
 
+body {
+    background-image: linear-gradient( #bde5d4,#96ecc7,#42ccbe);
+    height: 100vh;
+}
+
+.header {
+    text-shadow:     
+        1px 1px 2px white,
+        0 0 1em #f7f5f5,
+        0 0 0.2em #f7f5f5;
+}
+
 button {
     width: 100%;
 }
+
 .column {
     column-count: 5;
     column-gap: 30px;
@@ -12,12 +25,16 @@ button {
     display: inline-flex;
 }
 
+.background {
+    background-color: white;
+}
+
 .margin {
     margin: 2%;
 }
 
 .justify-content {
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .padding {
@@ -27,13 +44,13 @@ button {
 .flex {
     display: flex;
 }
+
 #city-form {
     min-width: 15%;
-    padding: 10px;
 }
 
 .border {
-    border: solid 1px;
+    border: solid 1px #f7f5f5;
 }
 
 .margin-bottom {

@@ -112,7 +112,7 @@ function renderForecastDataItem (dataItem){
     forecastChildNodes.setAttribute('id', dataItem.dateForecasted);
 
     forecastChildNodes.className = forecastChildNodes.className 
-        + 'center padding background-color border margin-bottom';
+        + 'z-depth-1 center padding background border margin-bottom';
 
     const dateForecastEl = document.createElement('li');
     dateForecastEl.setAttribute('style', 'list-style:none;');
