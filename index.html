@@ -28,7 +28,7 @@
     </div>
 
     <main class="flex justify-content row"> 
-        <div class="col-s3">
+        <div class="col-s3 small">
             <form id="city-form"> 
                 <div class="card horizontal">
                     <div class="card-stacked">
@@ -49,33 +49,39 @@
                 </div>
             </form>
 
-            <div class="card">
-                <div class="card-content center">
-                    <h6>
-                        Activities
-                    </h6>
-                    <div id="categories"
-                         class="card-action">
-                        <a href="#">
-                            example link
-                        </a>
-                    </div>
-              </div>
-            </div>
-        
-            <div class="card">
-                <div class="card-content center">
-                    <h6>
-                        Favorites
-                    </h6>
-                    <div id="favorites"
-                         class="card-action">
-                        <a href="#">
-                            example link
-                        </a>
-                    </div>
-              </div>
-            </div>
+            <form id="activities-form">
+                <div class="card">
+                    <div class="card-content center">
+                        <h6>
+                            Activities
+                        </h6>
+                        <div id="categories"
+                             class="card-action card-padding">
+                            <button class="btn waves-effect waves-light" 
+                                    type="submit" 
+                                    name="action"> 
+                                <a href="#categories-result">Campgrounds </a>
+                            </button>
+                        </div>
+                  </div>
+                </div>
+            </form>
+            
+            <form id="favorites-form">
+                <div class="card">
+                    <div class="card-content center">
+                        <h6>
+                            Favorites
+                        </h6>
+                        <div id="favorites"
+                             class="card-action">
+                            <a href="#">
+                                example link
+                            </a>
+                        </div>
+                  </div>
+                </div>
+            </form>
         </div>
 
         <div class="justify-content"> 
