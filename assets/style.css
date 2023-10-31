@@ -1,21 +1,30 @@
+:root {
+    --lightestTurquoise: #bde5d4;
+    --lightTurquoise: #96ecc7;
+    --turquoise: #42ccbe;
+    --almostWhite: #f7f5f5;
+    --white: white;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    background-image: linear-gradient( #bde5d4,#96ecc7,#42ccbe);
+    background-image: linear-gradient(var(--lightestTurquoise), var(--lightTurquoise), var(--turquoise));
+    background-attachment: fixed;
     height: 100vh;
-}
-
-.header {
-    text-shadow:     
-        1px 1px 2px white,
-        0 0 1em #f7f5f5,
-        0 0 0.2em #f7f5f5;
 }
 
 button {
     width: 100%;
+}
+
+.header {
+    text-shadow:     
+        1px 1px 2px var(--white),
+        0 0 1em var(--almostWhite),
+        0 0 0.2em var(--almostWhite);
 }
 
 .column {
@@ -26,7 +35,7 @@ button {
 }
 
 .background {
-    background-color: white;
+    background-color: var(--white);
 }
 
 .margin {
@@ -45,14 +54,55 @@ button {
     display: flex;
 }
 
-#city-form {
-    min-width: 15%;
-}
-
 .border {
-    border: solid 1px #f7f5f5;
+    border: solid 1px var(--almostWhite);
 }
 
 .margin-bottom {
     margin-bottom: 10px;
+}
+
+.card .card-padding {
+    padding: 0;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
+    color: var(--white);
+}
+
+@media screen and (max-width: 896px) {
+
+    .column {
+        column-gap: 14px;
+    }
+
+    .small {
+        margin-left: 13px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .padding {
+        padding: 5px;
+    }
+    
+    .column {
+        column-gap: 5px;
+    }
+
+    .card .card-content {
+        padding: 5px;
+    }
+
+    .card .card-action {
+        padding: 5px;
+    }
+
+   .small {
+        width: 38%;
+        margin-right: 5px;
+        margin-left: 13px;
+    }
 }
