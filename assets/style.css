@@ -104,8 +104,10 @@ button {
     }
 
    .small {
-        width: 38%;
-        margin-right: 5px;
-        margin-left: 13px;
+        margin-right: 10px;
+    }
+
+    .flex {
+        display: block;
     }
 }
