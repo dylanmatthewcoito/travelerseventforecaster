@@ -18,7 +18,7 @@
             </h3>
         </header>
     
-        <div class="row">
+        <div class="row custom-row">
             <div class="col-s5">
                 <h5 class="center-align">
                     Welcome! Plan your trip with us, let's look at the forecast then pick an activity!
@@ -26,11 +26,20 @@
             </div>
         </div>
     </div>
+    <div class="switch">
+        <label>
+          Light
+          <input id="checkbox"
+                 type="checkbox" >
+          <span class="lever"></span>
+          Dark
+        </label>
+    </div>
 
-    <main class="flex justify-content row"> 
-        <div class="col-s3 small">
+    <main class="flex justify-content"> 
+        <div class="small">
             <form id="city-form"> 
-                <div class="card horizontal">
+                <div class="card horizontal dark">
                     <div class="card-stacked">
                         <div class="card-content">
                             <input id="city-input" 
@@ -50,7 +59,7 @@
             </form>
 
             <form id="activities-form">
-                <div class="card">
+                <div class="card dark">
                     <div class="card-content center">
                         <h6>
                             Activities
@@ -68,7 +77,7 @@
             </form>
             
             <form id="favorites-form">
-                <div class="card">
+                <div class="card dark">
                     <div class="card-content center">
                         <h6>
                             Favorites
@@ -86,7 +95,7 @@
 
         <div class="justify-content"> 
             <div id="five-day-weather-forecast" 
-                 class=" col-s9 column padding justify-content">
+                 class="column padding justify-content">
             </div>
 
             <div id="categories-result"

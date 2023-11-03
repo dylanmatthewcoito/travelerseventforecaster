@@ -1,4 +1,5 @@
 const weatherApiKey = '0fffcdb9d9732daced94e2c5d89e2a50';
+const toggleSwitch = $('#checkbox');
 
 // start cascade of events with the event listener(given user input) after the html loads
 $().ready(function(){
@@ -66,7 +67,6 @@ function fetchForecast(coordinates) {
 // procures the data for the 5 days by selecting the indices if they're multiples of 8
 function filterForecastData (json) { 
     const forecastDataList = json.list;
-    console.log(forecastDataList)
     const forecastDataArray = [];
         for (let i=0; i < forecastDataList.length; i++) {
             const isEighthIndex = i%8 === 0;
@@ -97,7 +97,6 @@ function parseForecastData(forecastDataArray) {
 // displays a list of weather forecast items on webpage
 // uses renderForecastDataItem to create and format each forecast item
 function renderForecastData (forecastDataArray) {
-    console.log(forecastDataArray);
     const forecastParentNode = $('#five-day-weather-forecast');
     forecastParentNode.empty();
         for (let i=0; i < forecastDataArray.length; i++) {
@@ -142,4 +141,9 @@ function renderForecastDataItem (dataItem){
 
     return forecastChildNodes;
 }
+
+// toggles between light and dark viewing mode
+toggleSwitch.on('change', () => {
+    document.body.classList.toggle('dark-mode');
+});
 

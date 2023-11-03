@@ -6,10 +6,18 @@
     --turquoise: #42ccbe;
     --almostWhite: #f7f5f5;
     --white: white;
+    --grey: #6a6767;
+    --lightestBlack: rgb(91, 89, 89);
+    --lightBlack: rgb(46, 45, 45);
+    --black: black;
 }
 
 * {
     box-sizing: border-box;
+    font-family: 'Laila', serif;
+}
+
+button, input, optgroup, select, textarea { 
     font-family: 'Laila', serif;
 }
 
@@ -23,11 +31,19 @@ button {
     width: 100%;
 }
 
+.custom-row {
+    margin-bottom: 0;
+}
+
+.switch {
+    text-align: end;
+}
+
 .header {
     text-shadow:     
-        1px 1px 2px var(--white),
-        0 0 1em var(--almostWhite),
-        0 0 0.2em var(--almostWhite);
+    1px 1px 2px var(--white),
+    0 0 1em var(--almostWhite),
+    0 0 0.2em var(--almostWhite);
 }
 
 .column {
@@ -69,20 +85,41 @@ button {
     padding: 0;
 }
 
+/* for links from materialize, delete when no longer used*/
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
     color: var(--white);
 }
 
-@media screen and (max-width: 896px) {
+body.dark-mode {
+    background-image: linear-gradient(var(--lightestBlack), var(--lightBlack), var(--black));
+    background-attachment: fixed;
+}
 
+body.dark-mode header,
+body.dark-mode h5 {
+    color: var(--white);
+    text-shadow:     
+    1px 1px 2px var(--lightestTurquoise),
+    0 0 1em var(--lightTurquoise),
+    0 0 0.2em var(--turquoise);
+}
+body.dark-mode section, 
+body.dark-mode .dark {
+    background-color: var(--grey);
+    color: var(--white);
+    border: solid 1px var(--almostWhite);
+}
+
+@media screen and (max-width: 896px) {
+    
     .column {
         column-gap: 14px;
     }
-
+    
     .small {
         margin-left: 13px;
     }
-
+    
 }
 
 @media screen and (max-width: 600px) {
