@@ -17,7 +17,9 @@
             </h3>
         </header>
 
-        <div class="row">
+    
+        <div class="row custom-row">
+
             <div class="col-s5">
                 <h5 class="center-align">
                     Welcome! Plan your trip with us, let's look at the forecast then pick an activity!
@@ -25,11 +27,22 @@
             </div>
         </div>
     </div>
+    <div class="switch">
+        <label>
+          Light
+          <input id="checkbox"
+                 type="checkbox" >
+          <span class="lever"></span>
+          Dark
+        </label>
+    </div>
 
-    <main class="flex justify-content row">
-        <div class="col-s3">
-            <form id="city-form">
-                <div class="card horizontal">
+
+    <main class="flex justify-content"> 
+        <div class="small">
+            <form id="city-form"> 
+                <div class="card horizontal dark">
+
                     <div class="card-stacked">
                         <div class="card-content">
                             <input id="city-input" class="validate" placeholder="Enter City Name" type="text">
@@ -42,23 +55,28 @@
                     </div>
                 </div>
             </form>
-
-            <div class="card">
-                <div class="card-content center">
-                    <h6>
-                        Favorites
-                    </h6>
-                    <div id="favorites" class="card-action">
-                        <a href="#">
-                            example link
-                        </a>
-                    </div>
+            
+            <form id="favorites-form">
+                <div class="card dark">
+                    <div class="card-content center">
+                        <h6>
+                            Favorites
+                        </h6>
+                        <div id="favorites"
+                             class="card-action">
+                            <a href="#">
+                                example link
+                            </a>
+                        </div>
+                  </div>
                 </div>
-            </div>
+            </form>
         </div>
 
-        <div class="justify-content">
-            <div id="five-day-weather-forecast" class=" col-s9 column padding"></div>
+        <div class="justify-content"> 
+            <div id="five-day-weather-forecast" 
+                 class="column padding justify-content">
+            </div>
 
             <div class="justify-content">
                 <div id="results" class="col s12"><span class="flow-text"></span></div>

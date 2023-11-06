@@ -1,21 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Laila:wght@300&display=swap');
+
+:root {
+    --lightestTurquoise: #bde5d4;
+    --lightTurquoise: #96ecc7;
+    --turquoise: #42ccbe;
+    --almostWhite: #f7f5f5;
+    --white: white;
+    --grey: #6a6767;
+    --lightestBlack: rgb(91, 89, 89);
+    --lightBlack: rgb(46, 45, 45);
+    --black: black;
+}
+
 * {
     box-sizing: border-box;
+    font-family: 'Laila', serif;
+}
+
+
+button, input, optgroup, select, textarea { 
+    font-family: 'Laila', serif;
 }
 
 body {
-    background-image: linear-gradient(#bde5d4, #96ecc7, #42ccbe);
+    background-image: linear-gradient(var(--lightestTurquoise), var(--lightTurquoise), var(--turquoise));
+    background-attachment: fixed;
     height: 100vh;
-}
 
-.header {
-    text-shadow:
-        1px 1px 2px white,
-        0 0 1em #f7f5f5,
-        0 0 0.2em #f7f5f5;
 }
 
 button {
     width: 100%;
+}
+
+.custom-row {
+    margin-bottom: 0;
+}
+
+.switch {
+    text-align: end;
+}
+
+.header {
+    text-shadow:     
+    1px 1px 2px var(--white),
+    0 0 1em var(--almostWhite),
+    0 0 0.2em var(--almostWhite);
 }
 
 .column {
@@ -26,7 +56,7 @@ button {
 }
 
 .background {
-    background-color: white;
+    background-color: var(--white);
 }
 
 .margin {
@@ -45,14 +75,78 @@ button {
     display: flex;
 }
 
-#city-form {
-    min-width: 15%;
-}
-
 .border {
-    border: solid 1px #f7f5f5;
+    border: solid 1px var(--almostWhite);
 }
 
 .margin-bottom {
     margin-bottom: 10px;
+}
+
+.card .card-padding {
+    padding: 0;
+}
+
+/* for links from materialize, delete when no longer used*/
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
+    color: var(--white);
+}
+
+body.dark-mode {
+    background-image: linear-gradient(var(--lightestBlack), var(--lightBlack), var(--black));
+    background-attachment: fixed;
+}
+
+body.dark-mode header,
+body.dark-mode h5 {
+    color: var(--white);
+    text-shadow:     
+    1px 1px 2px var(--lightestTurquoise),
+    0 0 1em var(--lightTurquoise),
+    0 0 0.2em var(--turquoise);
+}
+body.dark-mode section, 
+body.dark-mode .dark {
+    background-color: var(--grey);
+    color: var(--white);
+    border: solid 1px var(--almostWhite);
+}
+
+@media screen and (max-width: 896px) {
+    
+    .column {
+        column-gap: 14px;
+    }
+    
+    .small {
+        margin-left: 13px;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+
+    .padding {
+        padding: 5px;
+    }
+    
+    .column {
+        column-gap: 5px;
+    }
+
+    .card .card-content {
+        padding: 5px;
+    }
+
+    .card .card-action {
+        padding: 5px;
+    }
+
+   .small {
+        margin-right: 10px;
+    }
+
+    .flex {
+        display: block;
+    }
 }
