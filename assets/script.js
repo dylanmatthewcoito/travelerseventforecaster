@@ -192,11 +192,11 @@ $(async function () {
                 const eventName = event.name;
                 const eventDate = event.dates.start.localDate;
                 const ticketSalesUrl = event.url;
-                const htmlCard = `<div class="card z-depth-1 center padding background border margin-bottom">
+                const htmlCard = `<section class="card z-depth-1 center padding background border margin-bottom">
                                     <h5>${eventName}</h5>
                                     <h6>Date: ${eventDate}</h6>
                                     <a href="${ticketSalesUrl}">Ticket Sales</a>
-                                </div>`;
+                                </section>`;
 
                 // Append html card to container
                 $('#results').append(htmlCard);

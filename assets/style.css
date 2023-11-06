@@ -87,11 +87,6 @@ button {
     padding: 0;
 }
 
-/* for links from materialize, delete when no longer used*/
-.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
-    color: var(--white);
-}
-
 body.dark-mode {
     background-image: linear-gradient(var(--lightestBlack), var(--lightBlack), var(--black));
     background-attachment: fixed;
