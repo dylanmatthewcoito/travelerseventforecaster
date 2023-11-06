@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Traveler's Trip Forecaster</title>
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/style.css">
-
 </head>
+
 <body>
     <div class="header">
         <header>
             <h3 class="center-align">
-                Traveler's Trip Forecaster
+                Concert Forecaster
             </h3>
         </header>
+
     
         <div class="row custom-row">
+
             <div class="col-s5">
                 <h5 class="center-align">
                     Welcome! Plan your trip with us, let's look at the forecast then pick an activity!
@@ -36,43 +37,22 @@
         </label>
     </div>
 
+
     <main class="flex justify-content"> 
         <div class="small">
             <form id="city-form"> 
                 <div class="card horizontal dark">
+
                     <div class="card-stacked">
                         <div class="card-content">
-                            <input id="city-input" 
-                                   class="validate"
-                                   placeholder="Enter City Name" 
-                                   type="text">
+                            <input id="city-input" class="validate" placeholder="Enter City Name" type="text">
                         </div>
                         <div class="card-action">
-                            <button class="btn waves-effect waves-light" 
-                                    type="submit" 
-                                    name="action"> 
+                            <button id="city-name" class="btn waves-effect waves-light" type="submit" name="action">
                                 Submit
                             </button>
                         </div>
                     </div>
-                </div>
-            </form>
-
-            <form id="activities-form">
-                <div class="card dark">
-                    <div class="card-content center">
-                        <h6>
-                            Activities
-                        </h6>
-                        <div id="categories"
-                             class="card-action card-padding">
-                            <button class="btn waves-effect waves-light" 
-                                    type="submit" 
-                                    name="action"> 
-                                Camping
-                            </button>
-                        </div>
-                  </div>
                 </div>
             </form>
             
@@ -98,15 +78,15 @@
                  class="column padding justify-content">
             </div>
 
-            <div id="categories-result"
-                 class="justify-content"> 
-                results placeholder
+            <div class="justify-content">
+                <div id="results" class="col s12"><span class="flow-text"></span></div>
             </div>
         </div>
     </main>
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="./assets/script.js"></script>
 </body>
+
 </html>

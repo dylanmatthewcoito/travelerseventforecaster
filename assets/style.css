@@ -17,6 +17,7 @@
     font-family: 'Laila', serif;
 }
 
+
 button, input, optgroup, select, textarea { 
     font-family: 'Laila', serif;
 }
@@ -25,6 +26,7 @@ body {
     background-image: linear-gradient(var(--lightestTurquoise), var(--lightTurquoise), var(--turquoise));
     background-attachment: fixed;
     height: 100vh;
+
 }
 
 button {

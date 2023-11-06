@@ -2,15 +2,14 @@ const weatherApiKey = '0fffcdb9d9732daced94e2c5d89e2a50';
 const toggleSwitch = $('#checkbox');
 
 // start cascade of events with the event listener(given user input) after the html loads
-$().ready(function(){
+$().ready(function () {
     const cityInputValue = $('#city-form');
-    cityInputValue.on('submit', getCityInputValue); 
+    cityInputValue.on('submit', getCityInputValue);
 })
 
 // where the magic happens, the parameters get passed around
-async function onCitySearch(cityName) { 
+async function onCitySearch(cityName) {
     const coordinates = await fetchCityCoordinates(cityName);
-
     const forecastData = await fetchForecast(coordinates);
     const filterData = filterForecastData(forecastData);
 
@@ -23,23 +22,23 @@ function getCityInputValue(event) {
     event.preventDefault();
 
     const cityInputValue = $('#city-input').val().trim();
-        if (!cityInputValue) {
-            throw new Error('No input.');
-        }
-    onCitySearch(cityInputValue) 
+    if (!cityInputValue) {
+        throw new Error('No input.');
+    }
+    onCitySearch(cityInputValue)
 }
 
-// gets coordinates from the geocoding API
+// gets coordinates from the geocoding API 
 function fetchCityCoordinates(cityInputValue) {
 
     const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q='${cityInputValue}&appid=${weatherApiKey}`;
     const geoResponsePromise = fetch(geoUrl);
     const geoDataPromise = geoResponsePromise.then(function (response) {
-            if (!response.ok) {
-                throw response.json(); 
-            }
-            return response.json();
-        })
+        if (!response.ok) {
+            throw response.json();
+        }
+        return response.json();
+    })
     const coordinatesPromise = geoDataPromise.then(function (json) {
         return {
             lat: json[0].lat,
@@ -48,37 +47,38 @@ function fetchCityCoordinates(cityInputValue) {
     })
     return coordinatesPromise;
 }
+
 // gets the raw data from the weather API
-function fetchForecast(coordinates) { 
+function fetchForecast(coordinates) {
     const lat = coordinates.lat;
     const lon = coordinates.lon;
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
 
     const forecastResponsePromise = fetch(forecastUrl);
     const forecastDataPromise = forecastResponsePromise.then(function (response) {
-            if (!response.ok) {
-                throw response.json();
-            }
-            return response.json();
-        })
-    return forecastDataPromise; 
+        if (!response.ok) {
+            throw response.json();
+        }
+        return response.json();
+    })
+    return forecastDataPromise;
 }
 
 // procures the data for the 5 days by selecting the indices if they're multiples of 8
-function filterForecastData (json) { 
+function filterForecastData(json) {
     const forecastDataList = json.list;
     const forecastDataArray = [];
-        for (let i=0; i < forecastDataList.length; i++) {
-            const isEighthIndex = i%8 === 0;
-            if (isEighthIndex) {
-                forecastDataArray.push(forecastDataList[i]);
-            } 
+    for (let i = 0; i < forecastDataList.length; i++) {
+        const isEighthIndex = i % 8 === 0;
+        if (isEighthIndex) {
+            forecastDataArray.push(forecastDataList[i]);
         }
-        return forecastDataArray;
+    }
+    return forecastDataArray;
 }
 
 // retrieves the desired forecast data from the API
-function getConsolidatedForecastData (forecastDataList) {
+function getConsolidatedForecastData(forecastDataList) {
 
     const dateForecasted = forecastDataList.dt_txt.split(' ')[0];
     const weatherIcon = forecastDataList.weather[0].icon;
@@ -86,7 +86,7 @@ function getConsolidatedForecastData (forecastDataList) {
     const windSpeed = forecastDataList.wind.speed;
     const humidity = forecastDataList.main.humidity;
 
-    return {dateForecasted, weatherIcon, temperature, windSpeed, humidity};
+    return { dateForecasted, weatherIcon, temperature, windSpeed, humidity };
 }
 
 // puts retrieved data into an array
@@ -96,21 +96,23 @@ function parseForecastData(forecastDataArray) {
 
 // displays a list of weather forecast items on webpage
 // uses renderForecastDataItem to create and format each forecast item
+
 function renderForecastData (forecastDataArray) {
+
     const forecastParentNode = $('#five-day-weather-forecast');
     forecastParentNode.empty();
-        for (let i=0; i < forecastDataArray.length; i++) {
-            const forecastChildNodes = renderForecastDataItem(forecastDataArray[i]);
-            forecastParentNode.append(forecastChildNodes);
-        }
+    for (let i = 0; i < forecastDataArray.length; i++) {
+        const forecastChildNodes = renderForecastDataItem(forecastDataArray[i]);
+        forecastParentNode.append(forecastChildNodes);
+    }
 }
 // takes a single data item and creates the corresponding html structure
-function renderForecastDataItem (dataItem){
+function renderForecastDataItem(dataItem) {
     const forecastChildNodes = document.createElement('section');
 
     forecastChildNodes.setAttribute('id', dataItem.dateForecasted);
 
-    forecastChildNodes.className = forecastChildNodes.className 
+    forecastChildNodes.className = forecastChildNodes.className
         + 'z-depth-1 center padding background border margin-bottom';
 
     const dateForecastEl = document.createElement('li');
@@ -141,6 +143,71 @@ function renderForecastDataItem (dataItem){
 
     return forecastChildNodes;
 }
+
+
+
+// $(async function () {
+
+//     function handleClick() {
+//         const currentCity = $('#city-input').val();
+//         console.log(currentCity);
+
+
+//         $.ajax({
+//             type: "GET",
+//             url: `https://app.ticketmaster.com/discovery/v2/events.json?size=25&city=${currentCity}&apikey=bAIpre2uuGdnYkcqGpCKhwkHIGblGZCp`,
+//             async: true,
+//             dataType: "json",
+//             success: function (json) {
+//                 console.log(json);
+
+//                 // Parse the response.
+//                 // Do other things.
+//             },
+//             error: function (xhr, status, err) {
+//             }
+//         });
+//     }
+//     $('#city-name').click(handleClick);
+
+// });
+
+$(async function () {
+
+    function handleClick() {
+        const currentCity = $('#city-input').val();
+        console.log(currentCity);
+
+
+        $.ajax({
+            type: "GET",
+            url: `https://app.ticketmaster.com/discovery/v2/events.json?size=25&city=${currentCity}&apikey=bAIpre2uuGdnYkcqGpCKhwkHIGblGZCp`,
+            async: true,
+            dataType: "json",
+        }).then(function (json) {
+            console.log(json);
+            // Append name, date, and ticket sales url to html cards.
+            const events = json._embedded.events;
+            $.each(events, function (index, event) {
+                const eventName = event.name;
+                const eventDate = event.dates.start.localDate;
+                const ticketSalesUrl = event.url;
+                const htmlCard = `<div class="card z-depth-1 center padding background border margin-bottom">
+                                    <h5>${eventName}</h5>
+                                    <h6>Date: ${eventDate}</h6>
+                                    <a href="${ticketSalesUrl}">Ticket Sales</a>
+                                </div>`;
+
+                // Append html card to container
+                $('#results').append(htmlCard);
+            });
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    $('#city-name').click(handleClick);
+
+});
 
 // toggles between light and dark viewing mode
 toggleSwitch.on('change', () => {
