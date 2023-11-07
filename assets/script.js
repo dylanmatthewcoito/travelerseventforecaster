@@ -219,27 +219,29 @@ $(async function () {
             console.log(error);
         });
     }
+    
     $('#city-name').click(handleClick);
-
+    
     // $('.FavoriteButton').click(handleFavoriteclick)
     $('#results').on('click','.FavoriteButton', handleFavoriteclick)
-    
-
-    function handleFavoriteclick(event){
-        const ticketid = $(event.target).data('ticketid'); // This refers to the index position in our array called countsarray
-        const favorites = $("#favorites") // This is the parent element
-        const favoriteItems = countsarray[ticketid]
-        let favhtml = `<section class="favorite-item">
-                            <div>${favoriteItems.name}, ${favoriteItems.date}</div>
-                            <button class="deletebutton" data-ticketid="${ticketid}">🗑️</button>
-                         </section>`;
-        
-        //append to favhtml
-        FavItems.push(favoriteItems)
-        favorites.append(favhtml)
-        localStorage.setItem('favorites',JSON.stringify(FavItems));                
-    }
 });
+
+
+
+function handleFavoriteclick(event){
+    const ticketid = $(event.target).data('ticketid'); // This refers to the index position in our array called countsarray
+    const favorites = $("#favorites") // This is the parent element
+    const favoriteItems = countsarray[ticketid]
+    let favhtml = `<section class="favorite-item">
+                        <div>${favoriteItems.name}, ${favoriteItems.date}</div>
+                        <button class="deletebutton" data-ticketid="${ticketid}">🗑️</button>
+                     </section>`;
+    
+    //append to favhtml
+    FavItems.push(favoriteItems)
+    favorites.append(favhtml)
+    localStorage.setItem('favorites',JSON.stringify(FavItems));                
+}
 
 let FavItems = [];
 let listOfItems = [];
@@ -259,7 +261,7 @@ toggleSwitch.on('change', () => {
 });
 
 function LoadFavorites(){
-    let storedFavorites = localStorage.getItem('favorites');
+    let storedFavorites = localStorage.getItem('favorites') || [];
     console.log(storedFavorites)
 
         countsarray = JSON.parse(storedFavorites);
