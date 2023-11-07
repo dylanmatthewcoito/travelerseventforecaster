@@ -172,6 +172,14 @@ function renderForecastDataItem(dataItem) {
 
 // });
 
+let counts = 0
+let countsarray = [] 
+// [ {ticketName, ticketType}, {}, {} ]
+
+// const  = {name: "1", type: "2"}
+// testObj.name; // 1
+// testObj.type; // 2
+
 $(async function () {
 
     function handleClick() {
@@ -196,7 +204,13 @@ $(async function () {
                                     <h5>${eventName}</h5>
                                     <h6>Date: ${eventDate}</h6>
                                     <a href="${ticketSalesUrl}">Ticket Sales</a>
+                                    <button class="FavoriteButton" data-ticketid= ${counts}>Favorite</button>
                                 </section>`;
+                // Make the object to store your information HERE
+                const testObj = {name: eventName, date: eventDate}; // Save our information into an object
+                countsarray.push(testObj); // Save this object above into our array
+                counts += 1; // Increment our unique identifier called count
+
 
                 // Append html card to container
                 $('#results').append(htmlCard);
@@ -207,10 +221,57 @@ $(async function () {
     }
     $('#city-name').click(handleClick);
 
+    // $('.FavoriteButton').click(handleFavoriteclick)
+    $('#results').on('click','.FavoriteButton', handleFavoriteclick)
+    
+
+    function handleFavoriteclick(event){
+        const ticketid = $(event.target).data('ticketid'); // This refers to the index position in our array called countsarray
+        const favorites = $("#favorites") // This is the parent element
+        const favoriteitems = countsarray[ticketid]
+        let favhtml = `<section class="favorite-item">
+                            <div>${favoriteitems.name}, ${favoriteitems.date}</div>
+                            <button class="deletebutton" data-ticketid="${ticketid}">🗑️</button>
+                         </section>`;
+        
+        //append to favhtml
+        favorites.append(favhtml)
+        localStorage.setItem('favorites',JSON.stringify(countsarray));                
+    }
 });
+let FavItems = [];
+let listOfItems = [];
+
+function handleDeleteClick(event) {
+    const ticketid = $(event.target).data('ticketid');
+    $(event.target).closest('.favorite-item').remove(); // Remove the item from the HTML
+    // Optionally remove the item from the countsarray if needed
+    countsarray.splice(ticketid,1);
+    localStorage.setItem('favorites', JSON.stringify(countsarray));
+}
+$('#favorites').on('click', '.deletebutton', handleDeleteClick);
 
 // toggles between light and dark viewing mode
 toggleSwitch.on('change', () => {
     document.body.classList.toggle('dark-mode');
 });
 
+function LoadFavorites(){
+    let storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites === null){
+        storedFavorites = []
+    }
+        else return storedFavorites;    
+    {
+        countsarray = JSON.parse(storedFavorites);
+        countsarray.forEach((item,index) => {
+            let favhtml = `<section class="favorite-item">
+            <div>${item.name}, ${item.date}</div>
+            <button class="deletebutton" data-ticketid="${ticketid}">🗑️</button>
+         </section>`;
+         $("#favorites").append(favhtml);
+        
+        });
+    }
+}
+LoadFavorites();
