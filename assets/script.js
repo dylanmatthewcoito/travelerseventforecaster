@@ -264,7 +264,7 @@ function LoadFavorites(){
     let storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     console.log(storedFavorites)
 
-        countsarray = JSON.parse(storedFavorites);
+        countsarray = storedFavorites
         console.log(countsarray);
         countsarray.forEach((item) => {
             let favhtml = `<section class="favorite-item">
