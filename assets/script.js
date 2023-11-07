@@ -228,17 +228,19 @@ $(async function () {
     function handleFavoriteclick(event){
         const ticketid = $(event.target).data('ticketid'); // This refers to the index position in our array called countsarray
         const favorites = $("#favorites") // This is the parent element
-        const favoriteitems = countsarray[ticketid]
+        const favoriteItems = countsarray[ticketid]
         let favhtml = `<section class="favorite-item">
-                            <div>${favoriteitems.name}, ${favoriteitems.date}</div>
+                            <div>${favoriteItems.name}, ${favoriteItems.date}</div>
                             <button class="deletebutton" data-ticketid="${ticketid}">🗑️</button>
                          </section>`;
         
         //append to favhtml
+        FavItems.push(favoriteItems)
         favorites.append(favhtml)
-        localStorage.setItem('favorites',JSON.stringify(countsarray));                
+        localStorage.setItem('favorites',JSON.stringify(FavItems));                
     }
 });
+
 let FavItems = [];
 let listOfItems = [];
 
@@ -258,20 +260,18 @@ toggleSwitch.on('change', () => {
 
 function LoadFavorites(){
     let storedFavorites = localStorage.getItem('favorites');
-    if (storedFavorites === null){
-        storedFavorites = []
-    }
-        else return storedFavorites;    
-    {
+    console.log(storedFavorites)
+
         countsarray = JSON.parse(storedFavorites);
-        countsarray.forEach((item,index) => {
+        console.log(countsarray);
+        countsarray.forEach((item) => {
             let favhtml = `<section class="favorite-item">
-            <div>${item.name}, ${item.date}</div>
-            <button class="deletebutton" data-ticketid="${ticketid}">🗑️</button>
-         </section>`;
-         $("#favorites").append(favhtml);
+                            <div>${item.name}, ${item.date}</div>
+                            <button class="deletebutton">🗑️</button>
+                            </section>`;
+            $("#favorites").append(favhtml);
         
         });
-    }
 }
+
 LoadFavorites();
