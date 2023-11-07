@@ -18,9 +18,18 @@ Acceptance criteria
 - WHEN I want to remove something from the favorite's list
 - THEN I can click on a button to remove it
 
-screenshots: 
 
-deployed link: 
+## Deployment Link: (https://dylanmatthewcoito.github.io/travelerseventforecaster/)
+
+
+ ## Screenshots of Application
+
+![Screenshot 2023-11-06 at 4 47 09 PM](https://github.com/dylanmatthewcoito/travelerseventforecaster/assets/71201051/a3eb36d8-36c4-48f5-9057-d8c989359529)
+
+![Screenshot 2023-11-06 at 4 48 15 PM](https://github.com/dylanmatthewcoito/travelerseventforecaster/assets/71201051/40871108-923f-4f51-b6aa-e8d731a0e388)
+
+
+
 
 ## Installations
 
@@ -41,5 +50,4 @@ Collaboration between Dylan Coito, Manraj Uppal and Ivana Djordjevic.
 ## License
 
 None.
-
 
