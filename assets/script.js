@@ -261,7 +261,7 @@ toggleSwitch.on('change', () => {
 });
 
 function LoadFavorites(){
-    let storedFavorites = localStorage.getItem('favorites') || [];
+    let storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     console.log(storedFavorites)
 
         countsarray = JSON.parse(storedFavorites);
