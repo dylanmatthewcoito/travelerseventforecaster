@@ -102,7 +102,7 @@ body.dark-mode h5 {
 }
 body.dark-mode section, 
 body.dark-mode .dark {
-    background-color: var(--grey);
+    background-color: var(--lightBlack);
     color: var(--white);
     border: solid 1px var(--almostWhite);
 }

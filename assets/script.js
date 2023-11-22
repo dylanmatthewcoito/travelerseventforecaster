@@ -1,6 +1,10 @@
 const weatherApiKey = '0fffcdb9d9732daced94e2c5d89e2a50';
 const toggleSwitch = $('#checkbox');
 
+let counts = 0;
+let countsarray = [];
+let favItems = JSON.parse(localStorage.getItem('favorites')) || [];
+
 // start cascade of events with the event listener(given user input) after the html loads
 $().ready(function () {
     const cityInputValue = $('#city-form');
@@ -96,7 +100,6 @@ function parseForecastData(forecastDataArray) {
 
 // displays a list of weather forecast items on webpage
 // uses renderForecastDataItem to create and format each forecast item
-
 function renderForecastData (forecastDataArray) {
 
     const forecastParentNode = $('#five-day-weather-forecast');
@@ -106,6 +109,7 @@ function renderForecastData (forecastDataArray) {
         forecastParentNode.append(forecastChildNodes);
     }
 }
+
 // takes a single data item and creates the corresponding html structure
 function renderForecastDataItem(dataItem) {
     const forecastChildNodes = document.createElement('section');
@@ -144,136 +148,124 @@ function renderForecastDataItem(dataItem) {
     return forecastChildNodes;
 }
 
+// fetches and displays list of events in a given city
+function handleClick(event) {
+    event.preventDefault();
 
+    const resultsNode = $('#results');
+    resultsNode.empty();
 
-// $(async function () {
+    const currentCity = $('#city-input').val().trim();
 
-//     function handleClick() {
-//         const currentCity = $('#city-input').val();
-//         console.log(currentCity);
+    $.ajax({
+        type: "GET",
+        url: `https://app.ticketmaster.com/discovery/v2/events.json?size=25&city=${currentCity}&apikey=bAIpre2uuGdnYkcqGpCKhwkHIGblGZCp`,
+        async: true,
+        dataType: "json",
+    }).then(function (json) {
+        console.log(json);
+        // Append name, date, and ticket sales url to html cards.
+        const events = json._embedded.events;
 
+        $.each(events, function (_, event) {
+            const eventName = event.name;
+            const eventDate = event.dates.start.localDate;
+            const forecastDate = dayjs().add(6, 'day').unix();
+            const eventA = dayjs(eventDate).unix();
 
-//         $.ajax({
-//             type: "GET",
-//             url: `https://app.ticketmaster.com/discovery/v2/events.json?size=25&city=${currentCity}&apikey=bAIpre2uuGdnYkcqGpCKhwkHIGblGZCp`,
-//             async: true,
-//             dataType: "json",
-//             success: function (json) {
-//                 console.log(json);
-
-//                 // Parse the response.
-//                 // Do other things.
-//             },
-//             error: function (xhr, status, err) {
-//             }
-//         });
-//     }
-//     $('#city-name').click(handleClick);
-
-// });
-
-let counts = 0
-let countsarray = [] 
-// [ {ticketName, ticketType}, {}, {} ]
-
-// const  = {name: "1", type: "2"}
-// testObj.name; // 1
-// testObj.type; // 2
-
-$(async function () {
-
-    function handleClick() {
-        const currentCity = $('#city-input').val();
-        console.log(currentCity);
-
-
-        $.ajax({
-            type: "GET",
-            url: `https://app.ticketmaster.com/discovery/v2/events.json?size=25&city=${currentCity}&apikey=bAIpre2uuGdnYkcqGpCKhwkHIGblGZCp`,
-            async: true,
-            dataType: "json",
-        }).then(function (json) {
-            console.log(json);
-            // Append name, date, and ticket sales url to html cards.
-            const events = json._embedded.events;
-            $.each(events, function (index, event) {
-                const eventName = event.name;
-                const eventDate = event.dates.start.localDate;
+            if (eventA < forecastDate) {
                 const ticketSalesUrl = event.url;
                 const htmlCard = `<section class="card z-depth-1 center padding background border margin-bottom">
                                     <h5>${eventName}</h5>
                                     <h6>Date: ${eventDate}</h6>
                                     <a href="${ticketSalesUrl}">Ticket Sales</a>
-                                    <button class="FavoriteButton" data-ticketid= ${counts}>Favorite</button>
-                                </section>`;
-                // Make the object to store your information HERE
-                const testObj = {name: eventName, date: eventDate}; // Save our information into an object
-                countsarray.push(testObj); // Save this object above into our array
-                counts += 1; // Increment our unique identifier called count
-
-
-                // Append html card to container
+                                    <button class="favoriteButton" data-ticketid= ${counts}>Favorite</button>
+                                  </section>`;
+                // Save information into an object
+                const testObj = {name: eventName, date: eventDate}; 
+                // Save object above into an array
+                countsarray.push(testObj); 
+                // Increment unique identifier named count
+                counts += 1; 
+    
                 $('#results').append(htmlCard);
-            });
-        }).catch(function (error) {
-            console.log(error);
+            }
         });
-    }
-    
-    $('#city-name').click(handleClick);
-    
-    // $('.FavoriteButton').click(handleFavoriteclick)
-    $('#results').on('click','.FavoriteButton', handleFavoriteclick)
-});
 
-
-
-function handleFavoriteclick(event){
-    const ticketid = $(event.target).data('ticketid'); // This refers to the index position in our array called countsarray
-    const favorites = $("#favorites") // This is the parent element
-    const favoriteItems = countsarray[ticketid]
-    let favhtml = `<section class="favorite-item">
-                        <div>${favoriteItems.name}, ${favoriteItems.date}</div>
-                        <button class="deletebutton" data-ticketid="${ticketid}">🗑️</button>
-                     </section>`;
-    
-    //append to favhtml
-    FavItems.push(favoriteItems)
-    favorites.append(favhtml)
-    localStorage.setItem('favorites',JSON.stringify(FavItems));                
+        if (counts === 0) {
+            $('#results').append(`<h1> No Events </h1>`)
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
 }
 
-let FavItems = [];
-let listOfItems = [];
+// saves and prints a user's favorite event
+function handleFavoriteclick(event){
+    // This refers to the index position in the array named countsarray
+    const ticketid = $(event.target).data('ticketid');
 
+    const favorites = $("#favorites"); 
+    const favoriteItem = countsarray[ticketid];
+
+    let addItems = true
+    
+    //to only save one item in local storage (no more duplicates)
+    for (const item of favItems) {
+  
+        if (item.name === favoriteItem.name && item.date === favoriteItem.date) {
+            addItems = false
+        }
+    }
+
+    if (addItems) {
+        let favhtml = `<section class="favorite-item">
+                        <div>${favoriteItem.name}, ${favoriteItem.date}</div>
+                        <button class="deleteButton" data-ticketid="${ticketid}">🗑️</button>
+                       </section>`;
+        
+        favorites.append(favhtml);
+        favItems.push(favoriteItem);
+        localStorage.setItem('favorites',JSON.stringify(favItems));                
+    }
+}
+
+//removes event from user's favorite list
 function handleDeleteClick(event) {
     const ticketid = $(event.target).data('ticketid');
-    $(event.target).closest('.favorite-item').remove(); // Remove the item from the HTML
+    // Remove the item from the HTML
+    $(event.target).closest('.favorite-item').remove(); 
     // Optionally remove the item from the countsarray if needed
     countsarray.splice(ticketid,1);
     localStorage.setItem('favorites', JSON.stringify(countsarray));
 }
-$('#favorites').on('click', '.deletebutton', handleDeleteClick);
+
+// prints favorite events upon page refresh
+function loadFavorites(){
+    let storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    
+    storedFavorites.forEach((item) => {
+        let favhtml = `<section class="favorite-item">
+                        <div>${item.name}, ${item.date}</div>
+                        <button class="deleteButton">🗑️</button>
+                       </section>`;
+        $('#favorites').append(favhtml);
+    });
+}
 
 // toggles between light and dark viewing mode
 toggleSwitch.on('change', () => {
     document.body.classList.toggle('dark-mode');
 });
 
-function LoadFavorites(){
-    let storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    console.log(storedFavorites)
+$('#city-form').on('submit', handleClick);
+$('#favorites').on('click', '.deleteButton', handleDeleteClick);
+$('#results').on('click','.favoriteButton', handleFavoriteclick);
 
-        countsarray = storedFavorites
-        console.log(countsarray);
-        countsarray.forEach((item) => {
-            let favhtml = `<section class="favorite-item">
-                            <div>${item.name}, ${item.date}</div>
-                            <button class="deletebutton">🗑️</button>
-                            </section>`;
-            $("#favorites").append(favhtml);
-        
-        });
-}
+loadFavorites();
 
-LoadFavorites();
+// changed section background for dark mode to a darker color
+// cleaned up code: deleted unused variables & unused/un-necessary code, pushed globlal variables at the top, added and removed comments, made code more consistent
+// emptied results node after each city search (so the results do not stack up anymore)
+// resolved issue where you could save the same event endlessly
+
